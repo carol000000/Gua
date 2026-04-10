@@ -130,7 +130,7 @@ body {
     padding: 40px 60px; /* 減少上下內距，增加左右內距 */
     text-align:center;   /* 如果寬度很大，標題靠左通常比置中好看 */
     /* 漸層色  */
-     background: linear-gradient(135deg, #3498db, #2c3e50); 
+     background: linear-gradient(135deg, #3498db, #7acbf7); 
 }
 .page-body {
     padding: 40px;
@@ -205,4 +205,9 @@ body {
 /* 滑鼠碰到選單時，恢復原色（例如圖片原本的藍色） */
 .sidebar ul li a:hover .nav-icon {
     filter: none; /* 移除濾鏡 */
+}
+.banner h1 {
+    font-size: 3.5rem;   /* 原本可能是 2.5rem，調大至 3.5rem */
+    font-weight: bold; 
+    color: #ffffff;  /* 加粗讓它更有份量 */
 }
