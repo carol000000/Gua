@@ -153,6 +153,9 @@ body {
     font-size: 1.1rem;   /* 讓選單文字更清晰 */
     letter-spacing: 1px; /* 增加字距，質感更好 */
 }
+.subtitle{
+    color:#ffffff
+}
 /*-----------------------------------------------------*/
 
 /* 全域平滑捲動 */
@@ -173,18 +176,68 @@ html {
     font-size: 1.5rem;
     
 }
-.section-title p {
+.section-title h2 {
     text-align: center;
-    margin-bottom: 40px;
-    font-size: 1.25rem;
+    font-size: 2rem;
     
 }
-.section-title h3 {
+.section-title p {
     text-align: center;
-    margin-bottom: 40px;
     font-size: 1rem;
     color: #ffa013;
+}
     
+
+/* 1. 建立橫向排列容器 */
+.intro-flex-wrapper {
+    display: flex;
+    align-items: center;    /* 垂直置中 */
+    justify-content: center; /* 水平置中 */
+    gap: 50px;              /* 文字與圖片的間距 */
+    padding: 40px;          /* 內距 */
+    text-align: left;       /* 讓文字內部靠左對齊 */
+}
+
+/* 2. 文字清單調整 */
+.intro-container {
+    flex: 1;                /* 佔據可用空間 */
+    max-width: 500px;       /* 限制文字寬度避免太散 */
+}
+
+.intro-container ul {
+    list-style: none;       /* 移除圓點 */
+    padding-left: 150px;
+}
+
+.intro-container ul li {
+    display: flex;          /* 讓「標題」與「<p>內容」橫向排列 */
+    align-items: baseline;  /* 對齊文字基準線 */
+    margin-bottom: 15px;    /* 每行間距 */
+    font-size: 1.5rem;
+}
+
+.intro-container ul li strong {
+    min-width: 100px;       /* 讓標題寬度一致，內容才會對齊 */
+    color: #006bf7;         /* 標題顏色 */
+}
+
+.intro-container ul li p {
+    margin: 0;
+    color: #333;
+}
+
+/* 3. 圖片調整 */
+.intro-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.intro-image img {
+    max-width: 100%;        /* 寬度自適應容器 */
+    height: auto;           /* 保持比例 */
+    max-height: 350px;      /* 限制最大高度 */
+    border-radius: 15px;    /* 圓點 */
 }
 
 /* 橫向網格佈局 */
@@ -306,13 +359,3 @@ html {
     color: #008cff;
 }
 
-.abc p {
-    color: #ff9500;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-.abc h3 {
-    color: #006bf7;
-    font-size: 2rem;
-    line-height: 1;
-}
