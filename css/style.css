@@ -208,7 +208,7 @@ html {
 
 /* 3. 滑鼠碰到後的顏色與浮動效果 (Hover) */
 .skill-hover:hover {
-    background: rgba(193, 230, 255, 0.537); /* 淡淡的藍色背景 */
+
     border-color: #049bff;                /* 藍色邊框 */
     transform: translateY(-15px);         /* 向上浮起 15px */
     box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3); /* 藍色發光陰影 */
@@ -280,8 +280,7 @@ html {
 .target-icon, .nav-icon {
     width: 60px;
     height: 60px;
-    /* 這串代碼能將「純黑色」圖片轉為亮藍色 (#3498db) */
-    filter: invert(51%) sepia(85%) saturate(1915%) hue-rotate(178deg) brightness(95%) contrast(88%);
+
     
     transition: all 0.3s ease;
 }
