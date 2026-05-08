@@ -290,3 +290,56 @@ html {
     margin-top: 10px;
     color: #008cff;
 }
+.friend-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 懸浮效果：稍微浮起並加深陰影 */
+.friend-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    border-color: #007bff;
+}
+
+/* 頭像/圖示部分 */
+.friend-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    background: #f0f0f0;
+}
+
+/* 文字資訊 */
+.friend-info {
+    overflow: hidden;
+}
+
+.friend-name {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.friend-desc {
+    font-size: 0.85rem;
+    color: #666;
+    display: -webkit-box;
+    
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
