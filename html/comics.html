@@ -7,7 +7,7 @@
     <title>青呱Gua的網頁-小遊戲</title>
 
 
-<link rel="icon" href="/images/mark.png" type="image/x-icon">
+    <link rel="icon" href="/images/mark.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/comics.css">
 
 </head>
@@ -57,15 +57,160 @@
     <div class="content">
         <article class="main-card">
             <header class="banner">
-                <h1>國中畫的漫畫</h1>
+                <h1>圖片或漫畫</h1>
             </header>
             <section class="section-title">
                 <br>
-                <p>1</p>
-                <br>
-                
+                <section class="section-title">
 
+                    <div class="book-container">
+                        <div class="book-page" id="comicPageContainer">
+                        </div>
+                    </div>
 
+                    <div class="comic-control-bar">
+
+                        <div class="action-buttons">
+                            <button class="book-btn" id="prevBtn">
+                                <span class="btn-icon">&#10094;</span> 上一頁
+                            </button>
+                            <button class="book-btn" id="nextBtn">
+                                下一頁 <span class="btn-icon">&#10148;</span>
+                            </button>
+                        </div>
+
+                        <div class="page-number" id="pageNumber">第 1 / 1 頁</div>
+
+                        <div class="menu-wrapper">
+                            <select id="comicSelect" class="comic-dropdown">
+                            </select>
+                        </div>
+
+                    </div>
+                </section>
+
+                <script>
+                    const comicDatabase = [
+                        {
+                            title: "插圖",
+                            images: [
+                                "/images/a001.png",
+                                "/images/a002.png",
+                                "/images/a003.png",
+                                "/images/a004.png",
+                                "/images/a005.png",
+                                "/images/a006.png",
+                                "/images/a007.png",
+                                "/images/a008.png",
+                                "/images/a009.jpg",
+                                "/images/a010.png",
+                                "/images/a011.png",
+                                "/images/a012.png",
+                                "/images/a013.png",
+                                "/images/a014.png",
+                                "/images/a015.png",
+                                "/images/a016.png"
+                            ]
+                        },
+                        {
+                            title: "國中畫的漫畫-1",
+                            images: [
+
+                            ]
+                        },
+                        {
+                            title: "國中畫的漫畫-2",
+                            images: [
+
+                            ]
+                        },
+                {
+                            title: "國中畫的漫畫-3",
+                            images: [
+
+                            ]
+                        },
+                {
+                            title: "國中畫的漫畫-4",
+                            images: [
+
+                            ]
+                        },
+                {
+                            title: "國中畫的漫畫-5",
+                            images: [
+
+                            ]
+                        },
+                    ];
+
+                    const comicSelect = document.getElementById('comicSelect');
+                    const container = document.getElementById('comicPageContainer');
+                    const prevBtn = document.getElementById('prevBtn');
+                    const nextBtn = document.getElementById('nextBtn');
+                    const pageNumber = document.getElementById('pageNumber');
+
+                    let currentComicIndex = 0;
+                    let currentImageIndex = 0;
+
+                    comicDatabase.forEach((comic, index) => {
+                        const option = document.createElement('option');
+                        option.value = index;
+                        option.textContent = comic.title;
+                        comicSelect.appendChild(option);
+                    });
+
+                    function renderComic() {
+                        container.innerHTML = '';
+                        const currentImages = comicDatabase[currentComicIndex].images;
+
+                        currentImages.forEach((src, index) => {
+                            const img = document.createElement('img');
+                            img.src = src;
+                            img.alt = `第 ${index + 1} 頁`;
+                            img.classList.add('comic-img');
+                            img.style.display = (index === 0) ? 'block' : 'none';
+                            container.appendChild(img);
+                        });
+
+                        currentImageIndex = 0;
+                        updatePageUI();
+                    }
+
+                    function updatePageUI() {
+                        const images = container.querySelectorAll('.comic-img');
+                        images.forEach((img, index) => {
+                            img.style.display = (index === currentImageIndex) ? 'block' : 'none';
+                        });
+                        pageNumber.textContent = `第 ${currentImageIndex + 1} / ${images.length} 頁`;
+
+                        // 額外小優化：第一頁時讓「上一頁」變淡，最後一頁時讓「下一頁」變淡
+                        prevBtn.style.opacity = (currentImageIndex === 0) ? '0.5' : '1';
+                        nextBtn.style.opacity = (currentImageIndex === images.length - 1) ? '0.5' : '1';
+                    }
+
+                    comicSelect.addEventListener('change', (e) => {
+                        currentComicIndex = e.target.value;
+                        renderComic();
+                    });
+
+                    nextBtn.addEventListener('click', () => {
+                        const images = container.querySelectorAll('.comic-img');
+                        if (currentImageIndex < images.length - 1) {
+                            currentImageIndex++;
+                            updatePageUI();
+                        }
+                    });
+
+                    prevBtn.addEventListener('click', () => {
+                        if (currentImageIndex > 0) {
+                            currentImageIndex--;
+                            updatePageUI();
+                        }
+                    });
+
+                    renderComic();
+                </script>
 
             </section>
 </body>

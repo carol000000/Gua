@@ -316,3 +316,136 @@ html {
     font-size: 2rem;
     line-height: 1;
 }
+/*---------------------*/
+
+
+/* =================================================== */
+/* 漫畫主外框（移除兩側按鈕後，讓它優雅置中） */
+/* =================================================== */
+.book-container {
+    display: block;
+    width: 100%;
+    max-width: 550px; /* 限制漫畫最大顯示寬度 */
+    margin: 0 auto 20px auto; /* 留下一點下邊距給控制列 */
+}
+
+.book-page {
+    width: 100%;
+    height: 580px; /* 漫畫高度 */
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(0, 140, 255, 0.1);
+}
+
+.comic-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: fadeIn 0.3s ease-in-out; /* 加上切換時的淡入小動畫 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* =================================================== */
+/* 下方智慧控制列（排版的核心） */
+/* =================================================== */
+.comic-control-bar {
+    max-width: 550px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 140, 255, 0.15);
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    
+    /* 讓裡面的元件垂直居中、分散對齊 */
+    display: flex;
+    flex-direction: column; /* 預設直向排列，方便手機閱讀 */
+    align-items: center;
+    gap: 15px;
+}
+
+/* 當螢幕寬度足夠時（如電腦版），自動橫向排開 */
+@media (min-width: 500px) {
+    .comic-control-bar {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* --- 左側：按鈕美化 --- */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.book-btn {
+    background: linear-gradient(135deg, #008cff, #005bc5);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 6px rgba(0, 91, 197, 0.2);
+    transition: all 0.2s ease;
+}
+
+.book-btn:hover {
+    background: linear-gradient(135deg, #ffa013, #e08300); /* 碰觸時變耀眼金橘色 */
+    box-shadow: 0 4px 12px rgba(255, 160, 19, 0.4);
+    transform: translateY(-2px); /* 微幅向上漂浮 */
+}
+
+.book-btn:active {
+    transform: translateY(0);
+}
+
+/* --- 中間：頁碼美化 --- */
+.page-number {
+    font-size: 1rem;
+    color: #005bc5;
+    font-weight: 700;
+    background: rgba(0, 140, 255, 0.08);
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* --- 右側：下拉選單選單美化 --- */
+.comic-dropdown {
+    padding: 8px 30px 8px 14px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #333333;
+    border: 2px solid #008cff;
+    border-radius: 8px;
+    background-color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    
+    /* 這裡做一個精緻的自訂下拉箭頭（防原生選單太醜） */
+    appearance: none;
+    -webkit-appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+.comic-dropdown:hover {
+    border-color: #ffa013;
+}
+
+.comic-dropdown:focus {
+    border-color: #ffa013;
+    box-shadow: 0 0 8px rgba(255, 160, 19, 0.3);
+}
