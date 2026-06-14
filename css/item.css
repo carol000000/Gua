@@ -15,6 +15,8 @@
     box-sizing: border-box;
 }
 
+
+
 body {
     background: #2b61e7; /* 深藍底色 */
     /* 這裡可以換成你喜歡的背景圖 */
@@ -109,6 +111,275 @@ body {
 /* 選單收合時，內容區跟著調整左邊距 */
 .menu-checkbox:checked ~ .content {
     margin-left: var(--sidebar-collapsed-width);
+}
+
+/* ==========================================================================
+   1. 桌機版預設樣式 (螢幕寬度 769px 以上)
+   ========================================================================== */
+:root {
+    --sidebar-width: 240px;
+    --sidebar-collapsed-width: 70px;
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+/* 核心版面外層：建議你的 HTML 最外層可以用一個 flex 容器包起來（非必要，但能防跑版） */
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+/* 隱藏 Checkbox 框框 */
+.menu-checkbox {
+    display: none;
+}
+
+/* 側邊欄主體 */
+.sidebar {
+    width: var(--sidebar-width);
+    background: rgba(0, 70, 247, 0.863);
+    backdrop-filter: blur(12px);
+    border-right: 1px solid var(--glass-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transition: width 0.3s ease;
+    z-index: 100;
+    overflow-x: hidden; /* 防止文字溢出破圖 */
+}
+
+/* 桌機版 Checkbox 勾選時縮小側邊欄 */
+.menu-checkbox:checked ~ .sidebar {
+    width: var(--sidebar-collapsed-width);
+}
+
+/* 漢堡按鈕 */
+.toggle-btn {
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.sidebar ul {
+    list-style: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    height: 60px;
+    white-space: nowrap;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.sidebar a:hover {
+    background: rgba(255, 232, 25, 0.918);
+}
+
+/* 桌機版圖示置中核心 */
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    /* 利用 margin 讓圖示在縮起時完美置中 */
+    margin-left: calc((var(--sidebar-collapsed-width) - 24px) / 2); 
+    margin-right: 20px;
+    flex-shrink: 0; /* 防止圖片被擠壓變形 */
+}
+
+/* 桌機版點擊收合時，隱藏文字 */
+.menu-checkbox:checked ~ .sidebar span {
+    display: none;
+}
+
+/* 右側主要內容區 */
+.content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    transition: margin-left 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 桌機版選單縮小時，內容區往左遞補 */
+.menu-checkbox:checked ~ .content {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+
+/* ==========================================================================
+   2. 手機版專用樣式 (螢幕寬度 768px 以下)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    
+    /* 側邊欄本體轉為上方頂客列 */
+    .sidebar {
+        width: 100% !important;     /* 強制寬度滿版 */
+        height: 60px !important;    /* 沒展開時固定 60px */
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        display: flex;
+        flex-direction: row;        /* 改為橫向排列 */
+        justify-content: space-between;
+        align-items: center;
+        overflow: visible;          /* 允許底下的 ul 彈出 */
+    }
+
+    /* 手機版不要讓側邊欄寬度縮小 */
+    .menu-checkbox:checked ~ .sidebar {
+        width: 100% !important;
+    }
+
+    /* 漢堡鈕固定在右上角 */
+    .toggle-btn {
+        height: 60px !important;
+        width: 60px !important;
+        order: 2;                   /* 確保按鈕排在最右邊 */
+    }
+
+    /* 選單清單（ul）：改為絕對定位，平常往上藏在螢幕外 */
+    .sidebar ul {
+        margin-top: 0;
+        position: absolute;
+        top: 60px;                  /* 從上方列底部開始往下排 */
+        left: 0;
+        width: 100%;
+        background: rgba(0, 60, 220, 0.98); /* 給手機版一個不透明的背景，防止透出後面內容 */
+        display: flex;
+        flex-direction: column;     /* 項目直向排列 */
+        
+        /* 隱藏核心 */
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 99;
+        pointer-events: none;       /* 隱藏時點不到 */
+    }
+
+    /* 當點擊漢堡鈕（Checkbox被勾選），選單整組滑下來 */
+    .menu-checkbox:checked ~ .sidebar ul {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* 手機版選單橫條樣式修正 */
+    .sidebar a {
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 項目間的細線 */
+    }
+
+    /* 修正手機版的圖示定位（不再套用桌機置中的 calc） */
+    .nav-icon {
+        margin-left: 0 !important;   /* 取消桌機版置中的靠左推 */
+        margin-right: 15px !important;
+    }
+
+    /* 強制手機版一定要看得到文字 */
+    .sidebar span {
+        display: inline !important;
+    }
+    .menu-checkbox:checked ~ .sidebar span {
+        display: inline !important;
+    }
+
+    /* 右側內容區：取消左邊距，改填上方留白防遮擋 */
+    .content {
+        margin-left: 0 !important;
+        padding-top: 80px !important; /* 60px 上方列 + 20px 留白 */
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* 覆蓋桌機版勾選時的 margin 設定 */
+    .menu-checkbox:checked ~ .content {
+        margin-left: 0 !important;
+    }
+}
+/* ==========================================================================
+   自我介紹區塊 - 桌機版 (預設：橫向排列)
+   ========================================================================== */
+.profile-card {
+    display: flex;
+    flex-direction: row;        /* 桌機版：橫向排列（左字右圖） */
+    align-items: center;        /* 垂直居中對齊 */
+    justify-content: space-between; /* 讓文字和圖片分開在兩側 */
+    background: rgb(255, 255, 255); /* 微透明微醺背景（配合你的玻璃擬態） */
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 10px;
+    max-width: 1190px;           /* 限制最大寬度，避免在寬螢幕上拉得太散 */
+    width: 100%;
+    box-sizing: border-box;
+    gap: 40px;                  /* 文字與圖片之間的間距 */
+    color: #ffffff;             /* 文字顏色 */
+}
+
+.text-content {
+    flex: 1;                    /* 讓文字區塊自動拉伸，填滿剩餘空間 */
+}
+
+.text-content h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: rgba(255, 136, 0, 0.918); /* 亮黃色標題，呼叫你的側邊欄 hover 色 */
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    color: #078f4d;
+    line-height: 2;
+    margin: 0;
+}
+
+/* 桌機版頭像容器與圖片 */
+.profile-avatar {
+    flex-shrink: 0;             /* 防止圖片被擠壓變形 */
+}
+
+.profile-avatar img {
+    width: 180px;               /* 桌機版頭像大小 */
+    height: 180px;
+    border-radius: 20px;        /* 圓角 */
+    object-fit: cover;          /* 裁切圖片，保持比例不變形 */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* 加上一點帥氣的陰影 */
+}
+
+
+/* ==========================================================================
+   自我介紹區塊 - 手機版 (螢幕寬度 768px 以下：字在上、圖在下)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    .profile-card {
+        flex-direction: column; /* 關鍵：空間不夠時轉為直向排列 */
+        text-align: center;     /* 手機版文字居中排版更漂亮 */
+        gap: 25px;              /* 縮小間距 */
+        padding: 20px;          /* 稍微縮減手機版的內邊距 */
+    }
+
+    .profile-avatar img {
+        width: 140px;           /* 手機版頭像稍微縮小一點 */
+        height: 140px;
+    }
 }
 
 /* 中央透明卡片 */
