@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 請修改為此頁面的標題 -->
+    <title>網站名稱｜頁面標題</title>
+    <link rel="icon" href="../images/mark.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/PageTemplate.css">
+</head>
+<body>
+    <!-- 側欄收合控制：保留 id 與 for 的對應關係 -->
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+
+    <nav class="sidebar" aria-label="主要選單">
+        <label for="menu-toggle" class="toggle-btn" aria-label="開啟或收合選單">
+            <img src="../images/menu-burger.png" alt="" class="nav-icon">
+        </label>
+
+        <ul>
+            <!-- 複製或刪除 li，以調整所有頁面共用的選單 -->
+            <li><a href="../index.html"><img src="../images/home.png" alt="" class="nav-icon"><span>首頁</span></a></li>
+            <li><a href="./item.html"><img src="../images/document.png" alt="" class="nav-icon"><span>我的東西</span></a></li>
+            <li><a href="./link.html"><img src="../images/clip.png" alt="" class="nav-icon"><span>朋友們</span></a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <article class="main-card">
+            <!-- 修改頁面主標題與說明 -->
+            <header class="banner">
+                <h1>頁面標題</h1>
+                <p>用一句話介紹這個頁面的內容。</p>
+            </header>
+
+            <div class="page-body">
+                <!-- 一般文字區塊：不需要時可直接刪除 -->
+                <section class="content-section">
+                    <h2 class="section-title">區塊標題</h2>
+                    <p>在這裡填入頁面內容。每個內容區塊都可以複製這個 section。</p>
+                </section>
+
+                <!-- 卡片區塊：複製 article.info-card 即可新增一張卡片 -->
+                <section class="content-section">
+                    <h2 class="section-title">卡片區塊</h2>
+                    <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <img src="../images/code-simple.png" alt="卡片圖示" class="target-icon">
+                            <h3>卡片標題</h3>
+                            <p>卡片的簡短說明。</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <img src="../images/document.png" alt="卡片圖示" class="target-icon">
+                            <h3>卡片標題</h3>
+                            <p>卡片的簡短說明。</p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- 需要連結卡片時，將整張卡片包在 a.card-link 裡 -->
+                <!--
+                <a class="card-link" href="https://example.com" target="_blank" rel="noopener noreferrer">
+                    <article class="info-card skill-hover">...</article>
+                </a>
+                -->
+            </div>
+        </article>
+    </main>
+</body>
+</html>
