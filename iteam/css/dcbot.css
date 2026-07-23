@@ -1,0 +1,217 @@
+/* 頁面模板：複製 PageTemplate.html 與本檔後，修改內容即可新增頁面。 */
+:root {
+    --sidebar-width: 240px;
+    --sidebar-collapsed-width: 70px;
+    --sidebar-background: rgba(0, 70, 247, 0.9);
+    --page-background-start: #4a749b;
+    --page-background-end: #06173d;
+    --accent: #008cff;
+    --accent-light: #90e9ff;
+    --text: #17476d;
+    --glass-border: rgba(255, 255, 255, 0.25);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Microsoft JhengHei", sans-serif;
+    background: linear-gradient(135deg, var(--page-background-start), var(--page-background-end));
+    background-attachment: fixed;
+}
+
+.menu-checkbox { display: none; }
+
+/* 側邊欄 */
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 100;
+    width: var(--sidebar-width);
+    overflow-x: hidden;
+    background: var(--sidebar-background);
+    border-right: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    transition: width 0.3s ease;
+}
+
+.menu-checkbox:checked ~ .sidebar { width: var(--sidebar-collapsed-width); }
+
+.toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+    cursor: pointer;
+}
+
+.sidebar ul { margin: 10px 0 0; padding: 0; list-style: none; }
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.sidebar a:hover { background: rgba(255, 232, 25, 0.92); }
+.sidebar span { font-size: 1.1rem; letter-spacing: 1px; }
+.menu-checkbox:checked ~ .sidebar span { display: none; }
+
+.nav-icon {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.toggle-btn .nav-icon { width: 28px; height: 28px; margin: 0; }
+.sidebar a:hover .nav-icon { filter: none; transform: scale(1.1); }
+.menu-checkbox:checked ~ .sidebar a { padding-left: 23px; }
+
+/* 主內容 */
+.content {
+    min-height: 100vh;
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.menu-checkbox:checked ~ .content { margin-left: var(--sidebar-collapsed-width); }
+
+.main-card {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.banner {
+    padding: 40px 32px;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+}
+
+.banner h1 { margin: 0; font-size: clamp(2.25rem, 6vw, 3.5rem); }
+.banner p { margin: 12px 0 0; font-size: 1.1rem; }
+
+.page-body { padding: 40px; line-height: 1.8; }
+.content-section + .content-section { margin-top: 52px; }
+.section-title { margin: 0 0 24px; color: var(--accent); font-size: clamp(1.8rem, 4vw, 2.5rem); text-align: center; }
+.page-body p { margin: 0; font-size: 1.1rem; }
+
+/* 卡片 */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.card-link { color: inherit; text-decoration: none; }
+
+.info-card {
+    height: 100%;
+    padding: 32px 24px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 140, 255, 0.18);
+    border-radius: 20px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.target-icon { width: 60px; height: 60px; object-fit: contain; }
+.info-card h3 { margin: 12px 0 8px; color: var(--accent); font-size: 1.35rem; }
+.info-card p { color: #5b6c7c; }
+.skill-hover:hover { border-color: var(--accent); box-shadow: 0 15px 30px rgba(0, 140, 255, 0.25); transform: translateY(-10px); }
+
+/* 手機版：側欄改為上方選單列 */
+@media (max-width: 768px) {
+    .sidebar { display: flex; align-items: center; justify-content: flex-end; width: 100% !important; height: 60px; overflow: visible; border-right: 0; border-bottom: 1px solid var(--glass-border); }
+    .toggle-btn { width: 60px; height: 60px; }
+    .sidebar ul { position: absolute; top: 60px; left: 0; width: 100%; margin: 0; opacity: 0; pointer-events: none; background: rgba(0, 60, 220, 0.98); transform: translateY(-140%); transition: transform 0.3s ease, opacity 0.3s ease; }
+    .menu-checkbox:checked ~ .sidebar ul { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .sidebar a { border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+    .sidebar span, .menu-checkbox:checked ~ .sidebar span { display: inline; }
+    .menu-checkbox:checked ~ .sidebar a { padding-left: 20px; }
+    .content, .menu-checkbox:checked ~ .content { margin-left: 0; padding: 80px 16px 16px; }
+    .page-body { padding: 28px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+}
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 置中 */
+    gap: 8px;
+    margin-top: 16px;
+    margin-right: 350px;
+}
+
+.link h3 {
+    font-size: 25px;
+    margin: 0;
+}
+
+.link a {
+    color: #4da3ff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap; /* 手機自動換行 */
+    position: relative;
+    left: 250px;
+}
+
+.profile-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10%;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.link h3 {
+    margin: 0;
+}
+.info {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #79d00e;
+    color: #faf9fd;
+    border-radius: 8px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    position: relative;
+    left: 50px;
+}

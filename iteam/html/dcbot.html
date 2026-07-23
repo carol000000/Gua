@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 請修改為此頁面的標題 -->
+    <title>青呱Gua的網頁-dcbot</title>
+    <link rel="icon" href="/images/mark.png" type="image/x-icon">
+    <link rel="stylesheet" href="/iteam/css/dcbot.css">
+</head>
+<body>
+    <!-- 側欄收合控制：保留 id 與 for 的對應關係 -->
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+
+    <nav class="sidebar" aria-label="主要選單">
+        <label for="menu-toggle" class="toggle-btn" aria-label="開啟或收合選單">
+            <img src="/images/menu-burger.png" alt="" class="nav-icon">
+        </label>
+
+        <ul>
+            <!-- 複製或刪除 li，以調整所有頁面共用的選單 -->
+            <li><a href="/index.html"><img src="/images/home.png" alt="" class="nav-icon"><span>首頁</span></a></li>
+            <li><a href="/html/item.html"><img src="/images/document.png" alt="" class="nav-icon"><span>我的東西</span></a></li>
+            <li><a href="/html/link.html"><img src="/images/clip.png" alt="" class="nav-icon"><span>朋友們</span></a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <article class="main-card">
+            <!-- 修改頁面主標題與說明 -->
+            <header class="banner">
+                <h1>Discord Bot</h1>
+                <p>青呱的實驗品</p>
+            </header>
+
+            <div class="page-body">
+                <!-- 一般文字區塊：不需要時可直接刪除 -->
+                <section class="content-section">
+                    <h2 class="section-title">青呱的實驗品</h2>
+<div class="profile">
+
+    <div class="profile-avatar">
+        <img src="/images/dcbotimg.png" alt="青呱的頭像">
+    </div>
+
+    <div class="profile-info">
+        <div class="link">
+            <h3>GitHub:</h3>
+            <a href="https://github.com/carol000000/dcbot" target="_blank" rel="noopener noreferrer">點我前往</a>
+        </div>
+
+        <div class="link">
+            <h3>Discord:</h3>
+            <a href="https://discord.gg/wXbXHhfvbd" target="_blank" rel="noopener noreferrer">點我前往</a>
+        </div>
+
+        <div class="link">
+            <h3>邀請連結:</h3>
+            <a href="https://discord.com/oauth2/authorize?client_id=1439177558967980183"
+               target="_blank"
+               rel="noopener noreferrer">
+                點我前往
+            </a>
+        </div>
+    </div>
+
+</div>
+                    </section>
+                    
+                <!-- 卡片區塊：複製 article.info-card 即可新增一張卡片 -->
+                <section class="content-section">
+                    <h2 class="section-title">功能</h2>
+                    <p class="info">小遊戲</p><br>
+                    <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/hello</h3>
+                            <p>回應招呼訊息</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>/運勢</h3>
+                            <p>隨機回應【 吉 】、【 普 】、【 凶 】</p>
+                        </article>
+                    </div>
+                     <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/猜數字</h3>
+                            <p>開啟 1~100 猜數字0</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>/猜拳</h3>
+                            <p> 0 (剪刀)、1 (石頭) 、 2 (布)</p>
+                        </article>
+                    </div>
+                     <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/比大小</h3>
+                            <p> 1~6 點骰子比大小 輸入 1 (比大) 或 0 (比小)</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>?????</h3>
+                            <p>未製作</p>
+                        </article>
+                    </div>
+                </section>
+                <!------------------------->
+                <section class="content-section">
+                    <p class="info">RPG</p><br>
+                    <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/reg</h3>
+                            <p>建立角色</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>/pet</h3>
+                            <p>查看個人資料</p>
+                        </article>
+                    </div>
+                     <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/signin</h3>
+                            <p>每日簽到</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>/mining</h3>
+                            <p>挖礦</p>
+                        </article>
+                    </div>
+                     <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/plantin</h3>
+                            <p>種植馬鈴薯</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>/buyseed</h3>
+                            <p>花費 50 呱 購買 10 顆種子</p>
+                        </article>
+                    </div>
+                    <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/sellstone</h3>
+                            <p>賣出背包所有石頭，每個 5 呱</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>/sellore</h3>
+                            <p>賣出背包所有礦物，每個 20 呱</p>
+                        </article>
+                    </div>
+                    <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/sellpotato</h3>
+                            <p>賣出背包所有馬鈴薯，每個 10 呱</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>/mrank</h3>
+                            <p>金錢排行榜（前 10 名與個人排名）</p>
+                        </article>
+                    </div>
+                    <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>/lrank</h3>
+                            <p>等級排行榜（前 10 名與個人排名</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>/lottery</h3>
+                            <p>抽獎</p>
+                        </article>
+                    </div>
+                </section>
+                <br>
+                    <p class="info">文字觸發</p><br>
+                    <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>hello</h3>
+                            <p>Hello!</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>ping</h3>
+                            <p>pong</p>
+                        </article>
+                    </div>
+                     <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>呱</h3>
+                            <p>呱呱在拉屎</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>幹</h3>
+                            <p>[標記玩家]罵髒話</p>
+                        </article>
+                    </div>
+                     <div class="card-grid">
+                        <article class="info-card skill-hover">
+                            <h3>早安 / 午安 / 晚安</h3>
+                            <p>隨機回應問候語、邀請玩猜數字或看運勢</p>
+                        </article>
+                        <article class="info-card skill-hover">
+                            <h3>運勢 / 猜數字</h3>
+                            <p>觸發文字版運勢占卜與猜數字遊戲</p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- 需要連結卡片時，將整張卡片包在 a.card-link 裡 -->
+                <!--
+                <a class="card-link" href="https://example.com" target="_blank" rel="noopener noreferrer">
+                    <article class="info-card skill-hover">...</article>
+                </a>
+                -->
+            </div>
+        </article>
+    </main>
+</body>
+</html>
