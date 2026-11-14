@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>找不到頁面 | 青呱 GUA</title>
+  <link rel="icon" href="/images/mark.png">
+  <script>
+    // 舊網址自動轉到新網址（改版前的連結才不會壞掉）
+    (function () {
+      var moved = {
+        "/html/main.html": "/",
+        "/html/link.html": "/friends/",
+        "/html/item.html": "/other/",
+        "/html/comics.html": "/other/comics.html",
+        "/iteam/html/dcbot.html": "/other/dcbot.html",
+        "/poop/poop.html": "/other/",
+        "/poop/html/poop-000.html": "/other/",
+      };
+      var to = moved[location.pathname.toLowerCase()];
+      if (to) location.replace(to);
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/docs.css">
+  <script src="/assets/js/site.js"></script>
+  <script src="/assets/js/layout.js"></script>
+</head>
+<body>
+<main class="doc">
+  <h1>404 找不到頁面</h1>
+  <p class="lead">這一頁可能被呱呱吃掉了。</p>
+  <p><a href="/">← 回首頁</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>筆記 | 青呱 GUA</title>
+  <link rel="icon" href="/images/mark.png">
+  <link rel="stylesheet" href="/assets/css/docs.css">
+  <script src="/assets/js/site.js"></script>
+  <script src="/assets/js/layout.js"></script>
+</head>
+<body>
+<main class="doc">
+  <h1>筆記</h1>
+  <p class="lead">學程式和各種東西時的筆記，依分類整理。</p>
+  <div id="list"></div>
+</main>
+<!-- 筆記清單在 /assets/js/site.js 的 notes 裡，group 就是分類 -->
+<script>GUA.renderList("#list", "notes");</script>
+</body>
+</html>

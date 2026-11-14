@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圖片與漫畫 | 青呱 GUA</title>
+  <link rel="icon" href="/images/mark.png">
+  <link rel="stylesheet" href="/assets/css/docs.css">
+  <script src="/assets/js/site.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/comics.js"></script>
+</head>
+<body>
+<main class="doc">
+  <p class="eyebrow"><a href="/other/">其他</a></p>
+  <h1>圖片與漫畫</h1>
+
+  <h2>漫畫</h2>
+  <div class="series" id="series"></div>
+  <ol class="chapter-list" id="chapters"></ol>
+
+  <h2>插圖</h2>
+  <div class="gallery" id="gallery"></div>
+</main>
+
+<dialog class="lightbox" id="lightbox" aria-label="檢視插圖">
+  <button class="lb-btn lb-close" type="button" aria-label="關閉"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" aria-label="上一張">‹</button>
+  <img alt="">
+  <button class="lb-btn lb-next" type="button" aria-label="下一張">›</button>
+  <p class="lb-count"></p>
+</dialog>
+
+<script>
+  var C = window.COMICS, esc = GUA.esc;
+  var total = C.chapters.reduce(function (n, ch) { return n + ch.pages.length; }, 0);
+
+  // 作品資訊（像小說網站的書本頁）
+  document.getElementById("series").innerHTML =
+    '<img class="series-cover" src="' + C.cover + '" alt="">' +
+    '<div class="series-info">' +
+      '<p class="series-title">' + esc(C.title) + "</p>" +
+      '<p class="series-meta">共 ' + C.chapters.length + " 話・" + total + " 頁</p>" +
+      '<p class="series-desc">' + esc(C.desc) + "</p>" +
+      '<div class="series-actions">' +
+        '<a class="btn btn-primary" href="/other/comic.html?ch=1">從第一話開始看</a>' +
+        '<a class="btn" href="/other/comic.html?ch=' + C.chapters.length + '">看最新一話</a>' +
+      "</div>" +
+    "</div>";
+
+  // 章節清單
+  document.getElementById("chapters").innerHTML = C.chapters.map(function (ch, i) {
+    return '<li><a href="/other/comic.html?ch=' + (i + 1) + '">' +
+      '<img src="' + ch.pages[0] + '" alt="" loading="lazy">' +
+      '<span class="ch-title">' + esc(ch.title) + "</span>" +
+      '<span class="ch-meta">' + ch.pages.length + " 頁" + (ch.date ? "・" + esc(ch.date) : "") + "</span>" +
+      (i === C.chapters.length - 1 ? '<span class="tag hot">最新</span>' : "") +
+      "</a></li>";
+  }).join("");
+
+  // 插圖牆 + 點開放大
+  var gallery = document.getElementById("gallery");
+  gallery.innerHTML = C.illustrations.map(function (src, i) {
+    return '<button type="button" data-i="' + i + '" aria-label="放大第 ' + (i + 1) + ' 張"><img src="' + src + '" alt="" loading="lazy"></button>';
+  }).join("");
+
+  var lb = document.getElementById("lightbox");
+  var lbImg = lb.querySelector("img"), lbCount = lb.querySelector(".lb-count"), cur = 0;
+  function showLb(i) {
+    cur = (i + C.illustrations.length) % C.illustrations.length;
+    lbImg.src = C.illustrations[cur];
+    lbCount.textContent = (cur + 1) + " / " + C.illustrations.length;
+  }
+  gallery.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    showLb(Number(b.dataset.i));
+    lb.showModal();
+  });
+  lb.querySelector(".lb-close").onclick = function () { lb.close(); };
+  lb.querySelector(".lb-prev").onclick = function () { showLb(cur - 1); };
+  lb.querySelector(".lb-next").onclick = function () { showLb(cur + 1); };
+  lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+  lb.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") showLb(cur - 1);
+    if (e.key === "ArrowRight") showLb(cur + 1);
+  });
+</script>
+</body>
+</html>

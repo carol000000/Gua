@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>漫畫 | 青呱 GUA</title>
+  <link rel="icon" href="/images/mark.png">
+  <link rel="stylesheet" href="/assets/css/docs.css">
+  <script src="/assets/js/site.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/comics.js"></script>
+</head>
+<body>
+<!-- 漫畫閱讀頁：/other/comic.html?ch=1 → 第 1 話，所有頁面往下捲著看 -->
+<main class="doc">
+  <p class="eyebrow"><a href="/other/">其他</a> / <a href="/other/comics.html">圖片與漫畫</a></p>
+  <h1 id="title"></h1>
+  <nav class="chapter-nav" id="navTop" aria-label="章節切換"></nav>
+  <div class="comic-pages" id="pages"></div>
+  <nav class="chapter-nav" id="navBottom" aria-label="章節切換"></nav>
+</main>
+<script>
+  var C = window.COMICS;
+  var n = C.chapters.length;
+  var ch = parseInt(new URLSearchParams(location.search).get("ch"), 10);
+  if (!(ch >= 1 && ch <= n)) ch = 1;
+  var chapter = C.chapters[ch - 1];
+  function url(i) { return "/other/comic.html?ch=" + i; }
+
+  document.title = C.title + " " + chapter.title + " | " + SITE.title;
+  document.getElementById("title").textContent = C.title + "・" + chapter.title;
+
+  var options = C.chapters.map(function (c, i) {
+    return '<option value="' + (i + 1) + '"' + (i + 1 === ch ? " selected" : "") + ">" + GUA.esc(c.title) + "</option>";
+  }).join("");
+  var nav =
+    (ch > 1 ? '<a class="btn" href="' + url(ch - 1) + '">← 上一話</a>' : '<span class="btn" aria-disabled="true">← 上一話</span>') +
+    '<select aria-label="選擇章節">' + options + "</select>" +
+    '<a class="btn" href="/other/comics.html">目錄</a>' +
+    (ch < n ? '<a class="btn btn-primary" href="' + url(ch + 1) + '">下一話 →</a>' : '<span class="btn" aria-disabled="true">已經是最新一話</span>');
+  ["navTop", "navBottom"].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.innerHTML = nav;
+    el.querySelector("select").addEventListener("change", function (e) { location.href = url(e.target.value); });
+  });
+
+  document.getElementById("pages").innerHTML = chapter.pages.map(function (src, i) {
+    return '<img src="' + src + '" alt="' + GUA.esc(chapter.title) + " 第 " + (i + 1) + ' 頁"' + (i > 1 ? ' loading="lazy"' : "") + ">";
+  }).join("");
+
+  // 鍵盤 ← → 換上一話 / 下一話
+  document.addEventListener("keydown", function (e) {
+    if (e.target.tagName === "SELECT") return;
+    if (e.key === "ArrowLeft" && ch > 1) location.href = url(ch - 1);
+    if (e.key === "ArrowRight" && ch < n) location.href = url(ch + 1);
+  });
+</script>
+</body>
+</html>
