@@ -61,5 +61,12 @@ window.SITE = {
       desc: "新增文章的步驟。",
       group: "不知道丟哪",
     },
+    {
+      id: "gua-os",
+      title: "GuaOS",
+      date: "2026-11-15",
+      desc: "把做OS的過程和認識到的東西寫下來",
+      group: "專案的記錄",
+    },
   ],
 };
