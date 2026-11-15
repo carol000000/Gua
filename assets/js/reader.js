@@ -30,20 +30,21 @@
     ? '<p class="post-foot"><a href="' + SITE.repo + "/edit/main" + src + '" target="_blank" rel="noopener">在 GitHub 上編輯這頁</a></p>'
     : "";
 
-  // GitHub 風格提示框：> [!TIP] / [!NOTE] / [!WARNING] / [!DANGER]
+  // 提示框：> [!NOTE] 灰 / [!TIP] 藍 / [!SUCCESS] 綠 / [!WARNING] 橘 / [!DANGER] 紅
+  // 預設只有顏色；同一行後面寫字就變成小標，例如 > [!WARNING] 小心
   function callouts(root) {
-    var names = { NOTE: "備註", TIP: "提示", WARNING: "注意", DANGER: "危險", IMPORTANT: "重要" };
     root.querySelectorAll("blockquote").forEach(function (bq) {
       var p = bq.firstElementChild;
       if (!p || p.tagName !== "P") return;
-      var m = p.innerHTML.match(/^\s*\[!(NOTE|TIP|WARNING|DANGER|IMPORTANT)\]\s*(?:<br>)?\s*/i);
+      var m = p.innerHTML.match(/^\s*\[!(NOTE|TIP|SUCCESS|WARNING|DANGER|IMPORTANT)\][ \t]*([^\n]*?)\s*(?:<br>|\n|$)/i);
       if (!m) return;
       var kind = m[1].toUpperCase();
+      var title = m[2].replace(/<br>$/, "").trim();
       p.innerHTML = p.innerHTML.slice(m[0].length);
       if (!p.innerHTML.trim()) p.remove();
       var div = document.createElement("div");
-      div.className = "callout " + kind.toLowerCase();
-      div.innerHTML = '<p class="callout-title">' + names[kind] + "</p>" + bq.innerHTML;
+      div.className = "callout " + (kind === "IMPORTANT" ? "note" : kind.toLowerCase());
+      div.innerHTML = (title ? '<p class="callout-title">' + title + "</p>" : "") + bq.innerHTML;
       bq.replaceWith(div);
     });
   }

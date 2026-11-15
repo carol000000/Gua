@@ -43,6 +43,13 @@ window.SITE = {
       desc: "動機",
       tags: ["???"],
     },
+    {
+      id: "my-yt",        
+      title: "我的Youtube",
+      date: "2026-11-15",
+      desc: "頻道的起源",
+      tags: ["心得", "YouTube"],
+    },
   ],
 
   // 筆記（group = 側欄分類）
