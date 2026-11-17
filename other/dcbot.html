@@ -12,8 +12,8 @@
 <body>
 <main class="doc">
   <p class="eyebrow"><a href="/other/">其他</a></p>
-  <h1>Discord Bot</h1>
-  <p class="lead">青呱的實驗品，用 Python 寫的 Discord 機器人，有小遊戲、RPG 和一些奇怪的文字觸發。</p>
+  <h1>呱呱的實驗品 Discord Bot</h1>
+  <p class="lead">一個中文 Discord 機器人：小遊戲、養成／經濟系統、提醒、自訂問候，以及防盜號刷頻。</p>
 
   <ul class="chips">
     <li><a class="chip" href="https://discord.com/oauth2/authorize?client_id=1439177558967980183" target="_blank" rel="noopener"><img src="/images/dcbotimg.png" alt="">邀請機器人</a></li>
@@ -21,49 +21,161 @@
     <li><a class="chip" href="https://discord.gg/RZ9uanBgjj" target="_blank" rel="noopener"><img src="/images/discord.png" alt="">Discord 群組</a></li>
   </ul>
 
-  <h2>小遊戲</h2>
+  <ul>
+    <li>第一次使用任何指令會<strong>自動建立角色</strong>，不需要先註冊</li>
+    <li>每個伺服器的設定各自獨立，由管理員用 <code>/config</code> 調整</li>
+  </ul>
+
+  <h2 id="general">一般指令</h2>
   <table>
     <thead><tr><th>指令</th><th>說明</th></tr></thead>
     <tbody>
-      <tr><td><code>/hello</code></td><td>回應招呼訊息</td></tr>
-      <tr><td><code>/運勢</code></td><td>隨機回應【 吉 】、【 普 】、【 凶 】</td></tr>
-      <tr><td><code>/猜數字</code></td><td>開啟 1~100 猜數字</td></tr>
-      <tr><td><code>/猜拳</code></td><td>0（剪刀）、1（石頭）、2（布）</td></tr>
-      <tr><td><code>/比大小</code></td><td>1~6 點骰子比大小，輸入 1（比大）或 0（比小）</td></tr>
+      <tr><td><code>/help</code></td><td>說明網頁連結</td></tr>
+      <tr><td><code>/hello</code></td><td>跟機器人打招呼</td></tr>
+      <tr><td><code>/運勢</code></td><td>抽今天的運勢（吉／普／凶）</td></tr>
+      <tr><td><code>/server_time</code></td><td>查看伺服器時間與台灣時間</td></tr>
     </tbody>
   </table>
 
-  <h2>RPG</h2>
+  <h2 id="games">小遊戲（要付呱）</h2>
+  <p>玩之前會先扣入場費，錢不夠就不能玩（可以先 <code>/signin</code> 領錢）。同一個人在同一個頻道一次只能玩一場；30 秒沒有回答就結束，入場費不退。</p>
+  <table>
+    <thead><tr><th>指令</th><th>入場費</th><th>玩法</th><th>獎金</th></tr></thead>
+    <tbody>
+      <tr><td><code>/猜數字</code>（或直接打「猜數字」）</td><td>20 呱</td><td>猜 1~100 的數字</td><td>第 1 次猜中 100 呱，每多猜一次少 10，最少 10 呱</td></tr>
+      <tr><td><code>/猜拳</code></td><td>10 呱</td><td>輸入 0 剪刀、1 石頭、2 布</td><td>贏 20 呱，平手退費</td></tr>
+      <tr><td><code>/比大小</code></td><td>10 呱</td><td>看自己的點數（1~6），輸入 1 比大、0 比小</td><td>贏 20 呱，平手退費</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="economy">角色與經濟</h2>
+  <p>貨幣單位是「呱」。</p>
   <table>
     <thead><tr><th>指令</th><th>說明</th></tr></thead>
     <tbody>
-      <tr><td><code>/reg</code></td><td>建立角色</td></tr>
-      <tr><td><code>/pet</code></td><td>查看個人資料</td></tr>
-      <tr><td><code>/signin</code></td><td>每日簽到</td></tr>
-      <tr><td><code>/mining</code></td><td>挖礦</td></tr>
-      <tr><td><code>/plantin</code></td><td>種植馬鈴薯</td></tr>
-      <tr><td><code>/buyseed</code></td><td>花費 50 呱購買 10 顆種子</td></tr>
-      <tr><td><code>/sellstone</code></td><td>賣出背包所有石頭，每個 5 呱</td></tr>
-      <tr><td><code>/sellore</code></td><td>賣出背包所有礦物，每個 20 呱</td></tr>
-      <tr><td><code>/sellpotato</code></td><td>賣出背包所有馬鈴薯，每個 10 呱</td></tr>
-      <tr><td><code>/mrank</code></td><td>金錢排行榜（前 10 名與個人排名）</td></tr>
-      <tr><td><code>/lrank</code></td><td>等級排行榜（前 10 名與個人排名）</td></tr>
-      <tr><td><code>/lottery</code></td><td>投越多可能賺越多</td></tr>
-      <tr><td><code>/抽獎</code></td><td>200 一次</td></tr>
+      <tr><td><code>/pet</code></td><td>查看角色資料（等級、HP、耐力、幸運、金錢、道具）</td></tr>
+      <tr><td><code>/rename</code></td><td>修改角色暱稱（最多 20 字）</td></tr>
+      <tr><td><code>/signin</code></td><td>每日簽到：+50 呱、耐力與 HP 回滿、+10 經驗</td></tr>
+      <tr><td><code>/mining</code></td><td>挖礦：耗 1 耐力，得到石頭或礦物（幸運越高礦物越多）</td></tr>
+      <tr><td><code>/buyseed</code></td><td>50 呱買 10 顆種子</td></tr>
+      <tr><td><code>/planting</code></td><td>種馬鈴薯：耗 1 顆種子與 1 農田耐力，有機率豐收、蟲害、挖到黃金馬鈴薯或遇到烏鴉</td></tr>
+      <tr><td><code>/catchcrow</code></td><td>趕走烏鴉（農田有烏鴉時不能種植），會得到小獎勵</td></tr>
+      <tr><td><code>/sellstone</code> <code>/sellore</code> <code>/sellpotato</code></td><td>賣出全部石頭（5 呱）／礦物（20 呱）／馬鈴薯（10 呱）</td></tr>
+      <tr><td><code>/抽獎</code></td><td>花 200 呱抽一次：3% 金錢翻倍、44% 得到 500 呱</td></tr>
+      <tr><td><code>/lottery</code></td><td>大樂透：自己決定投入金額，隨機倍率；投越多，倍率範圍越大（0 ~ 2 倍）</td></tr>
+      <tr><td><code>/mrank</code> <code>/lrank</code></td><td>金錢／等級排行榜</td></tr>
+      <tr><td><code>/addmoney</code></td><td>（限機器人管理員）幫玩家加錢</td></tr>
     </tbody>
   </table>
+  <ul>
+    <li>農田耐力上限 20，每 5 分鐘自動恢復 1 點</li>
+    <li>經驗值滿「等級 × 100」就升級，HP、耐力上限、幸運都會提升</li>
+  </ul>
 
-  <h2>文字觸發</h2>
+  <h2 id="notify">提醒</h2>
+  <p>設定過程的訊息只有自己看得到，到時間才會在頻道公開 @ 你。時間以台灣時間計算，分鐘只能選 00、15、30、45。</p>
   <table>
-    <thead><tr><th>輸入</th><th>回應</th></tr></thead>
+    <thead><tr><th>指令</th><th>說明</th></tr></thead>
     <tbody>
-      <tr><td><code>hello</code></td><td>Hello!</td></tr>
-      <tr><td><code>ping</code></td><td>pong</td></tr>
+      <tr><td><code>/notify</code></td><td>新增提醒：用下拉選單選時間與循環（不循環／每天／每週），按按鈕填日期、內容、次數</td></tr>
+      <tr><td><code>/notify_list</code></td><td>查看自己的提醒</td></tr>
+      <tr><td><code>/notify_edit</code></td><td>修改提醒</td></tr>
+      <tr><td><code>/notify_delete</code></td><td>刪除提醒</td></tr>
+    </tbody>
+  </table>
+  <p>每人最多 20 個提醒。</p>
+
+  <h2 id="auto-reply">聊天自動回覆</h2>
+  <p>機器人不會回覆其他機器人（包含自己），而且<strong>一則訊息最多只回一次</strong>。</p>
+  <table>
+    <thead><tr><th>你說</th><th>機器人回</th></tr></thead>
+    <tbody>
+      <tr><td><code>!hello</code></td><td>Hello!</td></tr>
       <tr><td><code>!呱</code></td><td>呱呱在拉屎</td></tr>
-      <tr><td><code>!幹</code></td><td>[標記玩家] 罵髒話</td></tr>
-      <tr><td><code>早安|午安|晚安</code></td><td>回應+[隨機句子]</td></tr>
+      <tr><td><code>ping</code></td><td>pong</td></tr>
+      <tr><td><code>運勢</code></td><td>吉／普／凶</td></tr>
+      <tr><td><code>早安</code>、<code>午安</code>、<code>晚安</code>……</td><td>問候＋隨機一句話（可用 <code>/config</code> 自訂）</td></tr>
+      <tr><td>頻道裡連續好幾則相同的句子</td><td>跟著說一次（可用 <code>/config</code> 開關、調整次數）</td></tr>
     </tbody>
   </table>
+
+  <h2 id="config">伺服器設定 /config（管理員）</h2>
+  <p>只有擁有「<strong>管理伺服器</strong>」或「<strong>管理員</strong>」權限的人能使用，回覆只有自己看得到。設定存在 <code>settings.json</code>，各伺服器互不影響。</p>
+  <p>參數旁標「選填」的可以不填。</p>
+
+  <h3 id="config-general">一般</h3>
+
+  <h4><code>/config show</code></h4>
+  <p>查看目前所有設定。</p>
+
+  <h3 id="config-greeting">問候回覆</h3>
+
+  <h4><code>/config greeting</code></h4>
+  <p>開關問候回覆。</p>
+  <ul>
+    <li><code>enabled</code>：開／關</li>
+  </ul>
+
+  <h4><code>/config greeting_add</code></h4>
+  <p>新增一句問候回覆；觸發詞不存在會自動建立（例如加一個「宵夜」）。</p>
+  <ul>
+    <li><code>trigger</code>：觸發詞</li>
+    <li><code>text</code>：機器人要回的話</li>
+  </ul>
+
+  <h4><code>/config greeting_remove</code></h4>
+  <p>刪除一句回覆。</p>
+  <ul>
+    <li><code>trigger</code>：觸發詞</li>
+    <li><code>text</code>（選填）：要刪的那句；不填就刪除整個觸發詞</li>
+  </ul>
+
+  <h3 id="config-repeat">重複句子</h3>
+
+  <h4><code>/config repeat</code></h4>
+  <p>頻道裡連續好幾則相同的句子時，機器人跟著說一次。</p>
+  <ul>
+    <li><code>enabled</code>：開／關</li>
+    <li><code>threshold</code>（選填）：連續幾則相同才跟著說，2~10，預設 3</li>
+  </ul>
+
+  <h3 id="config-welcome">歡迎訊息</h3>
+
+  <h4><code>/config welcome</code></h4>
+  <p>新成員加入時發送歡迎訊息。</p>
+  <ul>
+    <li><code>enabled</code>：開／關</li>
+    <li><code>channel</code>（選填）：發在哪個頻道</li>
+    <li><code>title</code>（選填）：標題</li>
+    <li><code>message</code>（選填）：內容，可用 <code>{member}</code>（新成員）、<code>{server}</code>（伺服器名稱）</li>
+  </ul>
+
+  <h3 id="antispam">防盜號刷頻</h3>
+
+  <h4><code>/config antispam</code></h4>
+  <p>防盜號刷頻的處分設定。</p>
+  <ul>
+    <li><code>enabled</code>：開／關</li>
+    <li><code>action</code>（選填）：處分方式，停權 ban（預設）、踢出 kick、禁言 timeout</li>
+    <li><code>delete_message_days</code>（選填）：停權時一起刪掉他最近幾天的訊息，0~7 天</li>
+    <li><code>timeout_minutes</code>（選填）：禁言幾分鐘</li>
+    <li><code>notice</code>（選填）：自訂公告，可用 <code>{user}</code>、<code>{channel}</code>；填 <code>default</code> 恢復預設</li>
+  </ul>
+
+  <h4><code>/config antispam_channel</code></h4>
+  <p>新增或移除陷阱頻道。</p>
+  <ul>
+    <li><code>operation</code>：新增／移除</li>
+    <li><code>channel</code>：頻道</li>
+  </ul>
+
+  <h4>怎麼運作</h4>
+  <p>被盜的帳號通常會在每個頻道狂貼廣告。做法是開一個<strong>沒有人該講話的陷阱頻道</strong>，任何人在裡面發言就會被自動處分，並在頻道公告。</p>
+  <p>有「管理伺服器」或「管理員」權限的人不會被處分。</p>
+  <div class="callout warning">
+    <p class="callout-title">注意</p>
+    <p>機器人的身分組必須<strong>排在要處分的人上面</strong>，而且要有「停權成員」「踢出成員」「禁言成員」「管理訊息」權限，否則處分會失敗。</p>
+  </div>
 </main>
 </body>
 </html>
