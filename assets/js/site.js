@@ -50,6 +50,20 @@ window.SITE = {
       desc: "頻道的起源",
       tags: ["心得", "YouTube"],
     },
+     {
+      id: "university-application-guide",        
+      title: "資工系特殊選才心得紀錄",
+      date: "2026-11-21",
+      desc: "過程心得，面試心得入口",
+      tags: ["特殊選才", "心得"],
+    },
+    {
+      id: "university-application-AS",        
+      title: "面試心得-亞洲大學",
+      date: "2026-11-21",
+      desc: "亞洲大學面試心得",
+      tags: ["特殊選才", "心得","面試"],
+    },
   ],
 
   // 筆記（group = 側欄分類）
